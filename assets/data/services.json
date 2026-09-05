@@ -1,0 +1,80 @@
+{
+  "modalities": [
+    {
+      "id": "acupuncture",
+      "name": "Traditional Acupuncture & Electro-Acupuncture",
+      "tagline": "Restoring energetic balance and stimulating natural healing pathways",
+      "description": "Utilizing hair-thin, single-use surgical stainless steel needles inserted into specific meridian points (acupoints) to disperse blockages, regulate the nervous system, and stimulate circulation. Often paired with gentle infra-red heat lamps and optional micro-current electro-stimulation for deeper neurological and muscular rehabilitation.",
+      "pricing": [
+        { "item": "Initial Assessment (10–15 min)", "fee": "$30" },
+        { "item": "Acupuncture Treatment Session (30 min)", "fee": "$60" }
+      ],
+      "highlights": [
+        "100% pre-sterilized, single-use disposable needles",
+        "Targeted infra-red heat lamp therapy included where indicated",
+        "Optional electro-acupuncture for acute or neurological conditions",
+        "Rooted in both classical meridian theory and physiological neurology"
+      ]
+    },
+    {
+      "id": "herbal-medicine",
+      "name": "Chinese Herbal Medicine (中药)",
+      "tagline": "Custom botanical formulations tailored to your constitutional diagnosis",
+      "description": "Traditional Chinese herbal pharmacology treats the whole person, balancing primary therapeutic botanicals with harmonizing catalysts. Formulated as concentrated water-soluble granules, powders, or capsules for easy daily administration.",
+      "pricing": [
+        { "item": "Initial Consultation & Herbal Prescription", "fee": "$30" },
+        { "item": "Follow-Up Prescription Adjustment", "fee": "$20" },
+        { "item": "Herbal Medicinals / Formulas", "fee": "Varies by formula" }
+      ],
+      "highlights": [
+        "Individualized constitutional formula compounding",
+        "Available in convenient granules, powders, and patent capsules",
+        "Regulated herbs sourced from tested, compliant suppliers",
+        "Addresses chronic internal disorders, fertility, digestion, and immunity"
+      ]
+    },
+    {
+      "id": "cupping",
+      "name": "Huo Guan (Fire Cupping · 火罐)",
+      "tagline": "Decompressing muscle tissue, easing myofascial tension, and promoting micro-circulation",
+      "description": "Glass cups applied using flame to create a vacuum suction. Cupping pulls stale metabolic waste out of deep muscle layers, opens lymphatic flow, and provides profound relief for persistent neck, shoulder, and lower back tightness.",
+      "pricing": [
+        { "item": "Combined with Acupuncture Session", "fee": "$20" },
+        { "item": "Standalone Cupping Session", "fee": "$30" }
+      ],
+      "highlights": [
+        "Relieves deep myofascial tightness and tension knots",
+        "Expels pathogens and systemic coldness/dampness",
+        "Popular among athletes and desk workers alike"
+      ]
+    },
+    {
+      "id": "gua-sha",
+      "name": "Gua Sha Scraping Therapy (刮痧)",
+      "tagline": "Releasing micro-circulatory blood stagnation and respiratory congestion",
+      "description": "A traditional scraping technique using a smooth-edged jade or buffalo horn instrument along muscle lines. Stimulates immune response, releases chronic fascia adhesions, and clears stagnation.",
+      "pricing": [
+        { "item": "Standard Session (10 minutes)", "fee": "$30" }
+      ],
+      "highlights": [
+        "Rapidly clears tension headaches and stiff necks",
+        "Effective during early-stage colds and respiratory tightness",
+        "Releases long-held myofascial restrictions"
+      ]
+    },
+    {
+      "id": "tuina-massage",
+      "name": "Traditional Medical Massage & Tuina",
+      "tagline": "Acupressure and rhythmic mobilization to realign joints and meridians",
+      "description": "Targeted clinical bodywork employing pressure along meridian pathways to mobilize joints, alleviate soft-tissue trauma, and enhance blood flow. Extended hours are available on Mondays and Saturdays specifically for massage.",
+      "pricing": [
+        { "item": "Clinical Massage Consultation & Session", "fee": "Inquire at booking" }
+      ],
+      "highlights": [
+        "Special weekend and evening appointment availability",
+        "Complements acupuncture for severe orthopedic rehabilitation",
+        "Non-needle option for sensitive patients and children"
+      ]
+    }
+  ]
+}

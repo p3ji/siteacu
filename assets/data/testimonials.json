@@ -1,0 +1,74 @@
+[
+  {
+    "id": "bell-palsy-maria",
+    "name": "Maria R., M.D., Ph.D.",
+    "location": "Kansas City / Ottawa",
+    "condition": "Bell's Palsy & Facial Nerve Paralysis",
+    "category": "neurological",
+    "quote": "I recently graduated with an M.D. as well as a Ph.D. in Pharmacology. Because of my training, I know that techniques such as acupuncture are often overlooked in Western medicine... When I came down with Bell's palsy, a good friend strongly recommended I try acupuncture with Dr. Leng. She treated me using acupuncture, heat, and massage for seven sessions over two weeks with excellent results. My personal physicians were amazed at the speed and extent of my recovery.",
+    "verified": true
+  },
+  {
+    "id": "hepatitis-simon",
+    "name": "Simon Y.",
+    "location": "Ottawa, Ontario",
+    "condition": "Chronic Hepatitis B & Liver Enzyme Flare-Up",
+    "category": "internal",
+    "quote": "My blood tests showed my liver enzyme (ALT) had steadily elevated to 92—twice normal. My specialist advised I was borderline for lifetime antiviral drugs with risk of mutation and resistance. In my first consultation with Dr. Leng, I was astonished by the depth of her knowledge. She prescribed tailored herbal treatment. Two months later, my blood test results came back: my liver function was back to normal with ALT down to 44, well below the threshold.",
+    "verified": true
+  },
+  {
+    "id": "spinal-arthritis-brenda",
+    "name": "Brenda S.",
+    "location": "Ashton, Ontario",
+    "condition": "Severe Cervical Spine Osteoarthritis & Nerve Impingement",
+    "category": "pain",
+    "quote": "I suffered severe pain in my upper neck, back, and arm from a large osteophyte pressing on a nerve in my upper spine. For months anti-inflammatories and twice-weekly physio did not alleviate the pain—it was getting difficult to raise my arm. In desperation, on my family physician's suggestion, I sought Dr. Leng. After six acupuncture treatments over three weeks, I was completely pain free in both back and arm.",
+    "verified": true
+  },
+  {
+    "id": "colitis-samir",
+    "name": "Samir A.",
+    "location": "Aylmer, Quebec",
+    "condition": "Ulcerative Colitis & Crohn's Disease",
+    "category": "digestive",
+    "quote": "I had been battling ulcerative colitis/Crohn's for almost 9 years, prescribed countless immunosuppressants and steroids with chronic pain and weight loss. Acupuncture combined with medicinal herbs from Dr. Leng helped in reducing all symptoms. With conventional medicine this could have taken years or failed completely. Dr. Leng has turned my life around.",
+    "verified": true
+  },
+  {
+    "id": "fertility-gordon-cathy",
+    "name": "Gordon & Cathy",
+    "location": "Ottawa, Ontario",
+    "condition": "Severe Infertility & IVF Alternative",
+    "category": "fertility",
+    "quote": "An infertility center told us our only hope for a child was immediate IVF due to severe morphology parameters. We decided to seek alternative care first with Dr. Linda Leng. She diagnosed our root imbalances and formulated Chinese herbal prescriptions to improve quality and nurture the womb. On July 16, 2007, our pregnancy was confirmed naturally! What marvelous skills Dr. Leng has.",
+    "verified": true
+  },
+  {
+    "id": "whiplash-trauma-khan",
+    "name": "S. Khan",
+    "location": "Ottawa, Ontario",
+    "condition": "Whiplash & Cervical Soft-Tissue Trauma",
+    "category": "pain",
+    "quote": "Following a serious highway collision on the Queensway, I had shooting pain in my neck, ears, and throat for eight months and could barely swallow. I was deathly afraid of needles, but Dr. Leng was so kind, patient, and gentle that it felt like taking a peaceful nap. My pains lessened dramatically after the first visit, and after the third session I was completely pain free.",
+    "verified": true
+  },
+  {
+    "id": "eczema-sue",
+    "name": "Sue M.",
+    "location": "Ottawa, Ontario",
+    "condition": "Severe Generalized Eczema & Skin Allergy",
+    "category": "skin",
+    "quote": "I came down with painful, intensely itchy red flare-ups all over my neck, chest, arms, stomach, and legs. Western dermatology offered no lasting relief. Dr. Linda treated me with acupuncture and custom herbal tea formulas. Within one week the redness subsided, and within two weeks the eczema was completely gone.",
+    "verified": true
+  },
+  {
+    "id": "bedwetting-allyson",
+    "name": "Allyson T.",
+    "location": "Stittsville, Ontario",
+    "condition": "Pediatric Bedwetting (Nocturnal Enuresis)",
+    "category": "pediatric",
+    "quote": "My 9-year-old son had been reliant on synthetic prescription nasal sprays for months with no weaning success. Seeking a gentle alternative, we saw Linda Leng for gentle acupressure and herbal remedy. Over the next month, my son went from wetting the bed nearly every night to being completely dry.",
+    "verified": true
+  }
+]
