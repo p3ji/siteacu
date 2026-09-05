@@ -1,9 +1,11 @@
 /**
  * Heritage Acupuncture & Chinese Herbal Center
- * Client-side interactions: filtering, modal, FAQs, and appointment requests.
+ * Client-side interactions: filtering, modal, FAQs, appointment requests,
+ * and Mandarin Chinese (Simplified / 简体中文) language switching.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initLanguage();
   initHeader();
   initMobileNav();
   initConditionsFilter();
@@ -11,6 +13,132 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initForms();
 });
+
+/* ==========================================================================
+   Language Switcher (Internationalization - i18n)
+   ========================================================================== */
+let currentLang = 'en';
+
+function initLanguage() {
+  const savedLang = localStorage.getItem('siteLanguage') || 'en';
+  setLanguage(savedLang);
+
+  // Bind click handlers to all lang buttons
+  const langButtons = document.querySelectorAll('.lang-btn');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = btn.getAttribute('data-lang');
+      if (lang && lang !== currentLang) {
+        setLanguage(lang);
+      }
+    });
+  });
+}
+
+function setLanguage(lang) {
+  if (typeof siteTranslations === 'undefined' || !siteTranslations[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('siteLanguage', lang);
+
+  const dict = siteTranslations[lang];
+
+  // 1. Update HTML document lang attribute
+  document.documentElement.lang = (lang === 'zh' ? 'zh-CN' : 'en');
+
+  // 2. Update document title
+  if (dict.docTitle) {
+    document.title = dict.docTitle;
+  }
+
+  // 3. Update all toggle button active states
+  const allLangBtns = document.querySelectorAll('.lang-btn');
+  allLangBtns.forEach(btn => {
+    const btnLang = btn.getAttribute('data-lang');
+    if (btnLang === lang) {
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+    } else {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  // 4. Update elements with data-i18n
+  const translatableElements = document.querySelectorAll('[data-i18n]');
+  translatableElements.forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) {
+      // If the translation contains HTML tags (like <em>, <strong>, etc.)
+      if (dict[key].includes('<')) {
+        el.innerHTML = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    }
+  });
+
+  // 5. Update input placeholders with data-i18n-placeholder
+  const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+  placeholderElements.forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key]) {
+      el.placeholder = dict[key];
+    }
+  });
+
+  // 6. Update Condition Tags
+  const conditionTags = document.querySelectorAll('.condition-tag');
+  conditionTags.forEach(tag => {
+    if (lang === 'zh') {
+      const zhVal = tag.getAttribute('data-zh');
+      if (zhVal) tag.textContent = zhVal;
+    } else {
+      const enVal = tag.getAttribute('data-en');
+      if (enVal) tag.textContent = enVal;
+    }
+  });
+
+  // 7. Update Select Options (Modality and Times)
+  updateSelectOptions(lang);
+}
+
+function updateSelectOptions(lang) {
+  const dict = siteTranslations[lang];
+  if (!dict) return;
+
+  const modalityMap = {
+    'acupuncture': dict.optAcu,
+    'herbal': dict.optHerbal,
+    'cupping': dict.optCupping,
+    'guasha': dict.optGuaSha,
+    'massage': dict.optMassage,
+    'general': dict.optGeneral
+  };
+
+  const timeMap = {
+    'morning': dict.optMorning,
+    'afternoon': dict.optAfternoon,
+    'thursday-evening': dict.optThuEve,
+    'saturday': dict.optSat
+  };
+
+  document.querySelectorAll('select#page-modality, select#modal-service').forEach(sel => {
+    Array.from(sel.options).forEach(opt => {
+      if (modalityMap[opt.value]) {
+        opt.textContent = modalityMap[opt.value];
+      }
+    });
+  });
+
+  document.querySelectorAll('select#page-time, select#modal-time').forEach(sel => {
+    Array.from(sel.options).forEach(opt => {
+      if (timeMap[opt.value]) {
+        opt.textContent = timeMap[opt.value];
+      }
+    });
+  });
+}
 
 /* ==========================================================================
    Header Scroll State
@@ -61,7 +189,7 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   Interactive Conditions Filter & Search
+   Interactive Conditions Filter & Dual-Language Search
    ========================================================================== */
 function initConditionsFilter() {
   const searchInput = document.getElementById('condition-search');
@@ -83,11 +211,14 @@ function initConditionsFilter() {
       
       const matchesCategory = (activeCategory === 'all' || cardCategory === activeCategory);
 
-      // Check tag matches & highlight
+      // Check tag matches & highlight (searches current text, English name, and Chinese name)
       let hasMatchingTag = false;
       tags.forEach(tag => {
-        const text = tag.textContent.toLowerCase();
-        if (term && text.includes(term)) {
+        const currentText = tag.textContent.toLowerCase();
+        const enText = (tag.getAttribute('data-en') || '').toLowerCase();
+        const zhText = (tag.getAttribute('data-zh') || '').toLowerCase();
+
+        if (term && (currentText.includes(term) || enText.includes(term) || zhText.includes(term))) {
           tag.classList.add('highlight');
           hasMatchingTag = true;
         } else {
@@ -228,7 +359,7 @@ function initForms() {
       
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending Request...';
+        submitBtn.innerHTML = (currentLang === 'zh' ? '正在提交...' : 'Sending Request...');
       }
 
       setTimeout(() => {
