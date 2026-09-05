@@ -688,6 +688,44 @@ button {
   box-shadow: var(--shadow-card);
 }
 
+.about-portrait-wrap {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-subtle);
+}
+
+.about-portrait-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.about-portrait-caption {
+  padding: 0.85rem 1rem;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.about-portrait-caption h4 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-portrait-caption p {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
 .about-quote-box {
   margin-top: 1.25rem;
   padding: 1.25rem;
