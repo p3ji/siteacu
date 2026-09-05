@@ -458,8 +458,8 @@ button {
 }
 
 .hero-trust-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  display: flex;
+  flex-wrap: wrap;
   gap: 2.5rem;
   justify-content: start;
   padding-top: 1.5rem;
