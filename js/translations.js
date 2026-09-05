@@ -251,7 +251,16 @@ const siteTranslations = {
     "bookingRefLabel": "Your Booking Reference:",
     "bookingNextSteps": "Dr. Leng's clinic will reach out via your preferred method to confirm your scheduled time. For immediate assistance, call (613) 592-8838.",
     "portalLink": "🔐 Practitioner & Staff Portal",
-    "s6CtaBtn": "Inquire for Your Condition"
+    "s6CtaBtn": "Inquire for Your Condition",
+    "sampleModalEyebrow": "Sample Demonstration Website",
+    "sampleModalTitle": "Notice: Sample Site · Not Functionally Active",
+    "sampleModalLead": "Please note that this website is an interactive concept demonstration and portfolio preview. <strong>It is not currently functional for real clinic appointments or medical triage.</strong>",
+    "sampleNoticePoint1": "<strong>Simulated Demonstration:</strong> Any appointments requested, booking references generated (e.g. HA-XXXX), or patient data entered are strictly simulated in-browser for demo evaluation.",
+    "sampleNoticePoint2": "<strong>Direct Practitioner Contact:</strong> To consult Linda Xiaochun Leng for genuine clinic inquiries, please telephone the clinic directly at <strong>(613) 592-8838</strong>.",
+    "sampleNoticePoint3": "<strong>Medical Emergencies:</strong> For acute symptoms, severe trauma, or medical emergencies, please dial <strong>911</strong> or visit your nearest hospital emergency department.",
+    "sampleRememberMe": "Do not show again during this browsing session",
+    "sampleModalBtn": "I Understand · Enter Demo Site",
+    "samplePillLabel": "⚠️ Sample Demo Site"
   },
   "zh": {
     "docTitle": "宏康中医针灸中心 | 冷晓春 注册中医师·注册针灸师 · 渥太华 Kanata & Carp",
@@ -504,7 +513,16 @@ const siteTranslations = {
     "bookingRefLabel": "您的就诊预约编号：",
     "bookingNextSteps": "门诊将按您选择的联络方式尽快与您确认就诊时间。如需紧急咨询，请直接致电 (613) 592-8838。",
     "portalLink": "🔐 医师与门诊后台管理",
-    "s6CtaBtn": "咨询针对您的调理方案"
+    "s6CtaBtn": "咨询针对您的调理方案",
+    "sampleModalEyebrow": "概念演示原型 · 示例网站",
+    "sampleModalTitle": "提示：示例演示网站 · 非真实接诊排班系统",
+    "sampleModalLead": "请注意：本网站为概念设计与功能技术演示原型（Sample / Demo Site）。<strong>目前不具备真实挂号接诊、病历流转或临床问诊功能。</strong>",
+    "sampleNoticePoint1": "<strong>演示数据模拟：</strong> 站内所有预约挂号操作、就诊编号（如 HA-XXXX）生成及表单提交仅在本地浏览器端模拟演示，未接入实体诊所后台。",
+    "sampleNoticePoint2": "<strong>真实门诊咨询：</strong> 如需向冷晓春中医师咨询真实看诊排班与门诊信息，请直接拨打门诊电话：<strong>(613) 592-8838</strong>。",
+    "sampleNoticePoint3": "<strong>医疗紧急求助：</strong> 如遇突发急性重症或危急健康状况，请立即拨打加拿大紧急电话 <strong>911</strong> 或前往就近医院急诊部。",
+    "sampleRememberMe": "本次会话期间不再弹出提示",
+    "sampleModalBtn": "已知晓 · 进入演示网站",
+    "samplePillLabel": "⚠️ 示例演示网站"
   }
 };
 

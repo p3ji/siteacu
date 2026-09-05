@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initConditionsFilter();
   initFaqAccordion();
   initInteractiveBooking();
+  initSampleSiteNotice();
 });
 
 /* ==========================================================================
@@ -601,4 +602,64 @@ function setupBookingWidget(prefix) {
       }
     }, 450);
   });
+}
+
+/* ==========================================================================
+   Sample Demonstration Website Notice Modal
+   ========================================================================== */
+function initSampleSiteNotice() {
+  const modal = document.getElementById('sample-site-modal');
+  if (!modal) return;
+
+  const closeX = document.getElementById('sample-modal-close-x');
+  const confirmBtn = document.getElementById('sample-modal-confirm-btn');
+  const rememberCheckbox = document.getElementById('sample-dismiss-session');
+  const openButtons = document.querySelectorAll('.open-sample-notice-trigger');
+
+  const closeModal = () => {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if (rememberCheckbox && rememberCheckbox.checked) {
+      sessionStorage.setItem('sample_site_notice_dismissed', 'true');
+    }
+  };
+
+  const openModal = () => {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Close triggers
+  if (closeX) closeX.addEventListener('click', closeModal);
+  if (confirmBtn) confirmBtn.addEventListener('click', closeModal);
+
+  // Overlay click dismissal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Escape key dismissal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  // Open triggers across page
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Auto-show when accessing the site unless dismissed in this session
+  const isDismissed = sessionStorage.getItem('sample_site_notice_dismissed');
+  if (!isDismissed) {
+    setTimeout(() => {
+      openModal();
+    }, 250);
+  }
 }

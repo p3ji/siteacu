@@ -27,6 +27,7 @@
 <span>Mon–Wed, Fri: 9:00 AM – 6:00 PM | Thu: 4:00 PM – 8:00 PM</span>
 </div>
 <div class="top-bar-actions">
+<button type="button" class="top-bar-notice-pill open-sample-notice-trigger" title="Sample Site Notice" data-i18n="samplePillLabel">⚠️ Sample Demo Site</button>
 <a class="top-bar-phone" href="tel:6135928838">
 <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
 <span>613-592-8838</span>
@@ -100,6 +101,7 @@
 <a class="btn btn-outline" href="tel:6135928838" style="text-align:center;">Call (613) 592-8838</a>
 <a class="btn btn-primary" data-open-modal="booking-modal" href="#book" style="text-align:center;">Book Consultation</a>
 <a href="portal.html" class="footer-portal-link" style="justify-content:center; margin-top:0.25rem;" data-i18n="portalLink">🔐 Practitioner &amp; Staff Portal</a>
+<button type="button" class="footer-notice-link open-sample-notice-trigger" style="justify-content:center; color:var(--text-muted); font-size:0.78rem;" data-i18n="samplePillLabel">⚠️ Sample Demo Site</button>
 </div>
 </div>
 <main>
@@ -970,8 +972,9 @@
 <div data-i18n="footerCopy">
         © 1993–2026 Heritage Acupuncture &amp; Chinese Herbal Center. All Rights Reserved.
       </div>
-<div>
-        101 Arbourbrook Blvd, Carp, ON K0A 1L0 · Kanata &amp; Ottawa West
+<div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+        <span>101 Arbourbrook Blvd, Carp, ON K0A 1L0 · Kanata &amp; Ottawa West</span>
+        <button type="button" class="footer-notice-link open-sample-notice-trigger" data-i18n="samplePillLabel">⚠️ Sample Demo Site</button>
       </div>
 </div>
 </footer>
@@ -1099,6 +1102,66 @@
 </div>
 </div>
 </div>
+
+<!-- ========================================================================
+     SAMPLE SITE DISCLAIMER POPUP MODAL
+     ======================================================================== -->
+<div aria-hidden="true" aria-modal="true" class="modal-overlay" id="sample-site-modal" role="dialog">
+  <div class="modal-container sample-notice-container">
+    <button aria-label="Close Notice" class="modal-close-btn" id="sample-modal-close-x">✕</button>
+    
+    <div class="sample-notice-header">
+      <div class="sample-notice-badge">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <span class="sample-notice-eyebrow" data-i18n="sampleModalEyebrow">Sample Demonstration Website</span>
+        <h3 data-i18n="sampleModalTitle">Notice: Sample Site · Not Functionally Active</h3>
+      </div>
+      <div aria-label="Language selection" class="lang-toggle" role="group" style="margin-right: 2.5rem; flex-shrink: 0;">
+        <button aria-pressed="true" class="lang-btn active" data-lang="en" type="button">EN</button>
+        <span class="lang-separator">|</span>
+        <button aria-pressed="false" class="lang-btn" data-lang="zh" type="button">中文</button>
+      </div>
+    </div>
+
+    <div class="sample-notice-body">
+      <div class="sample-lead-text" data-i18n="sampleModalLead">
+        Please note that this website is an interactive concept demonstration and portfolio preview. <strong>It is not currently functional for real clinic appointments or medical triage.</strong>
+      </div>
+
+      <ul class="sample-notice-list">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <span data-i18n="sampleNoticePoint1"><strong>Simulated Demonstration:</strong> Any appointments requested, booking references generated (e.g. HA-XXXX), or patient data entered are strictly simulated in-browser for demo evaluation.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="sampleNoticePoint2"><strong>Direct Practitioner Contact:</strong> To consult Linda Xiaochun Leng for genuine clinic inquiries, please telephone the clinic directly at <strong>(613) 592-8838</strong>.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span data-i18n="sampleNoticePoint3"><strong>Medical Emergencies:</strong> For acute symptoms, severe trauma, or medical emergencies, please dial <strong>911</strong> or visit your nearest hospital emergency department.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sample-notice-footer">
+      <label class="sample-remember-wrap">
+        <input type="checkbox" id="sample-dismiss-session">
+        <span data-i18n="sampleRememberMe">Do not show again during this browsing session</span>
+      </label>
+      <button type="button" class="btn btn-primary" id="sample-modal-confirm-btn" data-i18n="sampleModalBtn">
+        I Understand · Enter Demo Site
+      </button>
+    </div>
+  </div>
+</div>
+
 <script src="js/translations.js"></script>
 <script src="js/booking-api.js"></script>
 <script src="js/main.js"></script>
