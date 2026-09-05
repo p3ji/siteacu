@@ -1,6 +1,6 @@
 /**
  * Heritage Acupuncture & Chinese Herbal Center
- * Client-side interactions: filtering, modal, FAQs, appointment requests,
+ * Client-side interactions: filtering, interactive booking engine, FAQs,
  * and Mandarin Chinese (Simplified / 简体中文) language switching.
  */
 
@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initConditionsFilter();
   initFaqAccordion();
-  initModals();
-  initForms();
+  initInteractiveBooking();
 });
 
 /* ==========================================================================
@@ -108,33 +107,24 @@ function updateSelectOptions(lang) {
   if (!dict) return;
 
   const modalityMap = {
-    'acupuncture': dict.optAcu,
-    'herbal': dict.optHerbal,
-    'cupping': dict.optCupping,
-    'guasha': dict.optGuaSha,
-    'massage': dict.optMassage,
-    'general': dict.optGeneral
-  };
-
-  const timeMap = {
-    'morning': dict.optMorning,
-    'afternoon': dict.optAfternoon,
-    'thursday-evening': dict.optThuEve,
-    'saturday': dict.optSat
+    'initial-acupuncture': dict.optInitialAcu || dict.optAcu,
+    'follow-up-acupuncture': dict.optFollowUpAcu,
+    'herbal-consultation': dict.optHerbalConsult || dict.optHerbal,
+    'cupping-guasha': dict.optCuppingGuaSha || dict.optCupping,
+    'massage-therapy': dict.optMassageTherapy || dict.optMassage,
+    // legacy values fallback
+    'acupuncture': dict.optInitialAcu || dict.optAcu,
+    'herbal': dict.optHerbalConsult || dict.optHerbal,
+    'cupping': dict.optCuppingGuaSha || dict.optCupping,
+    'guasha': dict.optCuppingGuaSha || dict.optGuaSha,
+    'massage': dict.optMassageTherapy || dict.optMassage,
+    'general': dict.optInitialAcu || dict.optGeneral
   };
 
   document.querySelectorAll('select#page-modality, select#modal-service').forEach(sel => {
     Array.from(sel.options).forEach(opt => {
       if (modalityMap[opt.value]) {
         opt.textContent = modalityMap[opt.value];
-      }
-    });
-  });
-
-  document.querySelectorAll('select#page-time, select#modal-time').forEach(sel => {
-    Array.from(sel.options).forEach(opt => {
-      if (timeMap[opt.value]) {
-        opt.textContent = timeMap[opt.value];
       }
     });
   });
@@ -291,25 +281,75 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================================
-   Modal Dialogs (Consultation / Booking Request)
+   Interactive Booking Engine (Powered by BookingAPI)
    ========================================================================== */
-function initModals() {
-  const openButtons = document.querySelectorAll('[data-open-modal="booking-modal"]');
-  const modal = document.getElementById('booking-modal');
-  if (!modal) return;
+function getSuggestedBookingDate() {
+  const now = new Date();
+  const d = new Date();
+  d.setDate(d.getDate() + 1); // Start with tomorrow
 
-  const closeButtons = modal.querySelectorAll('.modal-close-btn, [data-close-modal]');
+  // If tomorrow is Sunday, advance to Monday
+  if (d.getDay() === 0) {
+    d.setDate(d.getDate() + 1);
+  }
+
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function formatDisplayDate(dateStr) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-').map(Number);
+  const d = new Date(parts[0], parts[1] - 1, parts[2]);
+  return d.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-CA', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
+function initInteractiveBooking() {
+  const modal = document.getElementById('booking-modal');
+  const modalForm = document.getElementById('modal-booking-form');
+  const modalConfirmCard = document.getElementById('modal-confirmation-card');
+  const pageForm = document.getElementById('booking-form-page');
+  const pageConfirmCard = document.getElementById('page-confirmation-card');
+
+  // Setup Modal Trigger Buttons
+  const openButtons = document.querySelectorAll('[data-open-modal="booking-modal"]');
+  const closeButtons = modal ? modal.querySelectorAll('.modal-close-btn, #modal-confirm-close-btn') : [];
 
   const openModal = (prefillService = '') => {
+    if (!modal) return;
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    if (prefillService) {
-      const select = modal.querySelector('#modal-service');
-      if (select) select.value = prefillService;
+
+    // Reset card views
+    if (modalForm) modalForm.style.display = 'block';
+    if (modalConfirmCard) modalConfirmCard.style.display = 'none';
+
+    // Set service
+    if (prefillService && modalForm) {
+      const select = modalForm.querySelector('#modal-service');
+      if (select) {
+        // Map common shortcuts
+        const s = prefillService.toLowerCase();
+        if (s.includes('acu')) select.value = 'initial-acupuncture';
+        else if (s.includes('herb')) select.value = 'herbal-consultation';
+        else if (s.includes('cup') || s.includes('gua')) select.value = 'cupping-guasha';
+        else if (s.includes('mass') || s.includes('tui')) select.value = 'massage-therapy';
+        else select.value = prefillService;
+      }
     }
+
+    // Refresh slots
+    setupBookingWidget('modal');
   };
 
   const closeModal = () => {
+    if (!modal) return;
     modal.classList.remove('open');
     document.body.style.overflow = '';
   };
@@ -326,54 +366,239 @@ function initModals() {
     btn.addEventListener('click', closeModal);
   });
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
-      closeModal();
-    }
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        closeModal();
+      }
+    });
+  }
+
+  // Setup In-Page Form Widget
+  setupBookingWidget('page');
+
+  // Setup Modal Widget
+  setupBookingWidget('modal');
 }
 
-/* ==========================================================================
-   Form Submissions (Validation & Client-side Confirmation)
-   ========================================================================== */
-function initForms() {
-  const forms = [
-    document.getElementById('booking-form-page'),
-    document.getElementById('modal-booking-form')
-  ];
+/**
+ * Configure dynamic date, slot rendering, and submission for a form widget
+ * prefix is 'modal' or 'page'
+ */
+function setupBookingWidget(prefix) {
+  const form = document.getElementById(prefix === 'modal' ? 'modal-booking-form' : 'booking-form-page');
+  const confirmCard = document.getElementById(prefix === 'modal' ? 'modal-confirmation-card' : 'page-confirmation-card');
+  if (!form) return;
 
-  forms.forEach(form => {
-    if (!form) return;
+  const dateInput = document.getElementById(`${prefix}-date`);
+  const serviceSelect = document.getElementById(prefix === 'modal' ? 'modal-service' : 'page-modality');
+  const slotsGrid = document.getElementById(`${prefix}-slots-grid`);
+  const statusLabel = document.getElementById(`${prefix}-slot-status`);
+  const timeHiddenInput = document.getElementById(`${prefix}-selected-time`);
+  const prefGroup = document.getElementById(`${prefix}-contact-pref-group`);
+  const prefHiddenInput = document.getElementById(`${prefix}-contact-pref`);
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
-      
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = (currentLang === 'zh' ? '正在提交...' : 'Sending Request...');
+  // Min date = today
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (dateInput) {
+    dateInput.min = todayStr;
+    if (!dateInput.value) {
+      dateInput.value = getSuggestedBookingDate();
+    }
+  }
+
+  // Contact Preference Pills
+  if (prefGroup && prefHiddenInput) {
+    prefGroup.querySelectorAll('.contact-pref-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        prefGroup.querySelectorAll('.contact-pref-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        prefHiddenInput.value = btn.dataset.pref;
+      });
+    });
+  }
+
+  // Render Slots function
+  function renderSlots() {
+    if (!slotsGrid || !dateInput) return;
+    slotsGrid.innerHTML = '';
+    timeHiddenInput.value = '';
+
+    const selectedDate = dateInput.value;
+    if (!selectedDate) {
+      if (statusLabel) statusLabel.textContent = 'Please choose a date.';
+      return;
+    }
+
+    if (typeof BookingAPI === 'undefined') {
+      console.warn('BookingAPI not found.');
+      return;
+    }
+
+    const openStatus = BookingAPI.isClinicOpen(selectedDate);
+    if (!openStatus.open) {
+      const msg = currentLang === 'zh'
+        ? `门诊休息 (${openStatus.reason})，请选择其他就诊日期。`
+        : `Clinic Closed (${openStatus.reason}). Please select another date.`;
+      slotsGrid.innerHTML = `<div style="grid-column: 1/-1; color: var(--color-danger, #c53030); font-size: 0.85rem; padding: 0.5rem 0;">${msg}</div>`;
+      if (statusLabel) statusLabel.textContent = '';
+      return;
+    }
+
+    const serviceId = serviceSelect ? serviceSelect.value : 'initial-acupuncture';
+    const slots = BookingAPI.getAvailableSlots(selectedDate, serviceId);
+
+    if (!slots || slots.length === 0) {
+      const msg = currentLang === 'zh' ? '该日就诊名额已满' : 'No available slots on this date';
+      slotsGrid.innerHTML = `<div style="grid-column: 1/-1; color: var(--text-muted); font-size: 0.85rem; padding: 0.5rem 0;">${msg}</div>`;
+      if (statusLabel) statusLabel.textContent = '';
+      return;
+    }
+
+    let firstAvailableSet = false;
+
+    slots.forEach(slot => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'slot-chip';
+      btn.textContent = slot.label;
+
+      if (!slot.available) {
+        btn.disabled = true;
+        btn.title = slot.reason;
+      } else {
+        // Auto-select first available slot
+        if (!firstAvailableSet) {
+          btn.classList.add('selected');
+          timeHiddenInput.value = slot.time;
+          firstAvailableSet = true;
+          if (statusLabel) {
+            statusLabel.textContent = currentLang === 'zh' ? `已选: ${slot.label}` : `Selected: ${slot.label}`;
+          }
+        }
+
+        btn.addEventListener('click', () => {
+          slotsGrid.querySelectorAll('.slot-chip').forEach(c => c.classList.remove('selected'));
+          btn.classList.add('selected');
+          timeHiddenInput.value = slot.time;
+          if (statusLabel) {
+            statusLabel.textContent = currentLang === 'zh' ? `已选: ${slot.label}` : `Selected: ${slot.label}`;
+          }
+        });
       }
 
-      setTimeout(() => {
-        const feedback = form.parentElement.querySelector('.form-feedback') || form.querySelector('.form-feedback');
-        if (feedback) {
-          feedback.style.display = 'block';
-          feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      slotsGrid.appendChild(btn);
+    });
+
+    if (!firstAvailableSet && statusLabel) {
+      statusLabel.textContent = currentLang === 'zh' ? '今日时段已过或已满' : 'All slots taken for this date';
+    }
+  }
+
+  // Listeners for slot re-rendering
+  if (dateInput) {
+    dateInput.addEventListener('change', renderSlots);
+  }
+  if (serviceSelect) {
+    serviceSelect.addEventListener('change', renderSlots);
+  }
+
+  // Initial render
+  renderSlots();
+
+  // Reset Booking handler (In-page)
+  const resetBtn = document.getElementById('page-reset-booking-btn');
+  if (resetBtn && prefix === 'page') {
+    resetBtn.addEventListener('click', () => {
+      if (form) form.style.display = 'block';
+      if (confirmCard) confirmCard.style.display = 'none';
+      form.reset();
+      renderSlots();
+    });
+  }
+
+  // Form Submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!timeHiddenInput.value) {
+      alert(currentLang === 'zh' ? '请选择一个可预约的时间段。' : 'Please select an available appointment time slot.');
+      return;
+    }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = currentLang === 'zh' ? '正在预约中...' : 'Securing Appointment...';
+    }
+
+    const patientName = (form.querySelector(`#${prefix}-name`)?.value || '').trim();
+    const patientPhone = (form.querySelector(`#${prefix}-phone`)?.value || '').trim();
+    const patientEmail = (form.querySelector(`#${prefix}-email`)?.value || '').trim();
+    const service = serviceSelect ? serviceSelect.value : 'initial-acupuncture';
+    const date = dateInput.value;
+    const time = timeHiddenInput.value;
+    const pref = prefHiddenInput ? prefHiddenInput.value : 'sms';
+    const firstVisitEl = document.getElementById(`${prefix}-first-visit`);
+    const isFirstVisit = firstVisitEl ? firstVisitEl.checked : true;
+    const notes = (form.querySelector(`#${prefix}-notes`)?.value || '').trim();
+
+    setTimeout(() => {
+      try {
+        const apt = BookingAPI.createAppointment({
+          patientName,
+          patientPhone,
+          patientEmail,
+          service,
+          date,
+          time,
+          preferredContact: pref,
+          isFirstVisit,
+          chiefComplaint: notes
+        });
+
+        // Hide form, show confirmation card
+        form.style.display = 'none';
+        if (confirmCard) {
+          confirmCard.style.display = 'block';
+          
+          const refEl = document.getElementById(`${prefix}-confirm-ref`);
+          if (refEl) refEl.textContent = apt.reference;
+
+          const srvEl = document.getElementById(`${prefix}-confirm-service`);
+          if (srvEl) srvEl.textContent = currentLang === 'zh' ? (apt.serviceNameZh || apt.serviceName) : apt.serviceName;
+
+          const dtEl = document.getElementById(`${prefix}-confirm-datetime`);
+          if (dtEl) dtEl.textContent = `${formatDisplayDate(apt.date)} at ${apt.timeLabel || apt.time}`;
+
+          const contEl = document.getElementById(`${prefix}-confirm-contact`);
+          if (contEl) {
+            const contactMap = {
+              sms: currentLang === 'zh' ? '手机短信确认' : 'SMS Text Confirmation',
+              phone: currentLang === 'zh' ? '电话回拨确认' : 'Direct Phone Call',
+              email: currentLang === 'zh' ? '电子邮件确认' : 'Email Confirmation'
+            };
+            contEl.textContent = contactMap[pref] || pref;
+          }
+
+          confirmCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
         form.reset();
+      } catch (err) {
+        alert(err.message || 'Error booking appointment. Please try again or call (613) 592-8838.');
+      } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
         }
-      }, 600);
-    });
+      }
+    }, 450);
   });
 }

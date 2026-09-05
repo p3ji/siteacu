@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practitioner Portal | Dr. Linda Xiaochun Leng | Heritage Acupuncture & TCM</title>
+  <meta name="description" content="Secure clinical management portal for Dr. Linda Xiaochun Leng to review and manage patient appointments, schedules, and clinical notes.">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Portal Styles -->
+  <link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       PORTAL HEADER
+       ======================================================================== -->
+  <header class="portal-header">
+    <div class="portal-header-inner">
+      <a href="index.html" class="portal-brand" title="View Public Patient Website">
+        <img src="assets/images/logo-mark-transparent.png" alt="Heritage Acupuncture Logo" class="portal-logo">
+        <div class="portal-brand-text">
+          <h1>Heritage Acupuncture & TCM</h1>
+          <span class="portal-brand-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Clinical Owner & Practitioner Portal
+          </span>
+        </div>
+      </a>
+
+      <div class="portal-header-meta">
+        <div class="live-pill" title="LocalStorage sync active with Supabase integration ready">
+          <span class="live-indicator"></span>
+          <span>Live Sync Active</span>
+        </div>
+
+        <div class="doctor-profile-chip">
+          <img src="assets/images/linda-leng-portrait.png" alt="Dr. Linda Xiaochun Leng" class="doctor-avatar">
+          <div>
+            <div class="doctor-name">Dr. Linda Xiaochun Leng</div>
+            <div style="font-size: 0.72rem; color: #d1dfd7;">R.Ac, R.TCMP • CTCMPAO #2183</div>
+          </div>
+        </div>
+
+        <a href="index.html" class="portal-exit-btn" title="Return to Public Website">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>Patient Site</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN DASHBOARD
+       ======================================================================== -->
+  <main class="portal-main">
+    <!-- Top Greeting and Actions -->
+    <div class="portal-intro-bar">
+      <div class="portal-greeting">
+        <h2>Clinic Schedule & Inquiries</h2>
+        <div class="portal-date-str" id="currentDateDisplay">Loading schedule date...</div>
+      </div>
+
+      <div class="portal-top-actions">
+        <button type="button" class="btn btn-primary" id="btnOpenWalkIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>+ Manual / Walk-in Booking</span>
+        </button>
+
+        <button type="button" class="btn btn-secondary" id="btnOpenBlockDate">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Manage Days Off</span>
+        </button>
+
+        <button type="button" class="btn btn-secondary btn-sm" id="btnResetDemo" title="Restore pristine demo patient dataset">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          <span>Reset Demo</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <section class="metrics-grid" aria-label="Clinical Metrics Summary">
+      <div class="metric-card">
+        <div class="metric-icon-wrap pending">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="metric-data">
+          <h3>Pending Requests</h3>
+          <div class="metric-value" id="metricPending">0</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap today">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div class="metric-data">
+          <h3>Today's Visits</h3>
+          <div class="metric-value" id="metricToday">0</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap confirmed">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="metric-data">
+          <h3>Confirmed Upcoming</h3>
+          <div class="metric-value" id="metricConfirmed">0</div>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap completed">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <polyline points="17 11 19 13 23 9"></polyline>
+          </svg>
+        </div>
+        <div class="metric-data">
+          <h3>Completed Visits</h3>
+          <div class="metric-value" id="metricCompleted">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbar Filters & Search -->
+    <div class="portal-toolbar">
+      <div class="status-tabs" role="tablist">
+        <button type="button" class="status-tab-btn active" data-status="all">
+          <span>All Inquiries</span>
+          <span class="count-pill">0</span>
+        </button>
+        <button type="button" class="status-tab-btn" data-status="pending">
+          <span>Needs Review</span>
+          <span class="count-pill alert">0</span>
+        </button>
+        <button type="button" class="status-tab-btn" data-status="confirmed">
+          <span>Confirmed</span>
+          <span class="count-pill">0</span>
+        </button>
+        <button type="button" class="status-tab-btn" data-status="completed">
+          <span>Completed</span>
+          <span class="count-pill">0</span>
+        </button>
+      </div>
+
+      <div class="toolbar-controls">
+        <div class="search-input-wrap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search patient, phone, ref...">
+        </div>
+
+        <select id="dateRangeFilter" class="select-filter" aria-label="Filter by date range">
+          <option value="all">All Dates</option>
+          <option value="today">Today Only</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="past">Past History</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Appointments Feed -->
+    <section id="appointmentsList" class="appointments-container" aria-label="Appointments List">
+      <!-- Injected by js/portal.js -->
+    </section>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+      <h3>No Appointments Found</h3>
+      <p>There are no appointments matching the current filter or search criteria.</p>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       MODAL 1: CLINICAL NOTES (DR. LENG PRIVATE HEALTH RECORD)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="clinicalNotesModal" role="dialog" aria-modal="true" aria-labelledby="modalNotesTitle">
+    <div class="portal-modal">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="modalNotesTitle">Clinical & Treatment Notes</h3>
+          <div style="font-size: 0.8rem; color: var(--color-text-muted);" id="modalNotesRef">HA-0000</div>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="clinicalNotesForm">
+        <div class="modal-body">
+          <div style="font-weight: 600; color: var(--color-primary);" id="modalNotesPatientName">Patient Name</div>
+          
+          <div class="form-group">
+            <label class="form-label" for="modalClinicalNotes">TCM Clinical Examination & Treatment (Confidential)</label>
+            <textarea id="modalClinicalNotes" class="form-textarea" placeholder="Record pulse diagnosis, tongue coating, meridian diagnosis, acupoint prescriptions (e.g. ST36, SP6, LI4, LV3), moxa / cupping parameters, and patient response..."></textarea>
+            <span class="form-help">Recorded in accordance with Ontario CTCMPAO record-keeping guidelines.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="modalInternalNotes">Administrative & Care Plan Notes</label>
+            <textarea id="modalInternalNotes" class="form-textarea" style="min-height: 70px;" placeholder="Insurance claim details (Sun Life / Canada Life), preferred appointment frequency, family references..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Notes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: RESCHEDULE APPOINTMENT
+       ======================================================================== -->
+  <div class="modal-backdrop" id="rescheduleModal" role="dialog" aria-modal="true" aria-labelledby="rescheduleModalTitle">
+    <div class="portal-modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="rescheduleModalTitle">Reschedule Appointment</h3>
+        <button type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="rescheduleForm">
+        <div class="modal-body">
+          <div>
+            <strong id="reschedulePatientName" style="color: var(--color-primary); font-size: 1.05rem;">Patient Name</strong>
+            <div id="rescheduleCurrentInfo" style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.2rem;">Currently booked...</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rescheduleDate">Select New Date</label>
+            <input type="date" id="rescheduleDate" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Select Available Slot</label>
+            <div id="rescheduleSlotGrid" class="modal-slot-grid">
+              <!-- Injected dynamically -->
+            </div>
+            <span class="form-help">Slots are adjusted to match clinic operating hours and existing bookings.</span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Reschedule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: MANAGE BLOCKED DATES & CLINIC CLOSURES
+       ======================================================================== -->
+  <div class="modal-backdrop" id="blockDateModal" role="dialog" aria-modal="true" aria-labelledby="blockModalTitle">
+    <div class="portal-modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="blockModalTitle">Manage Clinic Closures & Days Off</h3>
+        <button type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="blockDateForm" style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-border);">
+          <div class="form-group">
+            <label class="form-label" for="blockDateInput">Block New Date</label>
+            <input type="date" id="blockDateInput" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="blockReasonInput">Reason (Visible to Booking System)</label>
+            <input type="text" id="blockReasonInput" class="form-input" placeholder="e.g. Statutory Holiday, Practitioner Training, Vacation" required>
+          </div>
+
+          <button type="submit" class="btn btn-secondary btn-sm" style="align-self: flex-start;">+ Block This Date</button>
+        </form>
+
+        <label class="form-label">Currently Blocked Dates</label>
+        <div id="blockedDatesList" class="blocked-dates-list">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-close-modal">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 4: MANUAL / WALK-IN BOOKING ENTRY
+       ======================================================================== -->
+  <div class="modal-backdrop" id="newAptModal" role="dialog" aria-modal="true" aria-labelledby="newAptTitle">
+    <div class="portal-modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="newAptTitle">Manual / Walk-in Booking</h3>
+        <button type="button" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="newAptForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="walkinName">Patient Full Name *</label>
+            <input type="text" id="walkinName" class="form-input" required placeholder="e.g. John Doe">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+            <div class="form-group">
+              <label class="form-label" for="walkinPhone">Phone Number *</label>
+              <input type="tel" id="walkinPhone" class="form-input" required placeholder="e.g. 613-555-0199">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="walkinEmail">Email Address</label>
+              <input type="email" id="walkinEmail" class="form-input" placeholder="patient@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="walkinService">Clinical Service *</label>
+            <select id="walkinService" class="form-select" required>
+              <option value="initial-acupuncture">Initial Consultation & Acupuncture (75 min)</option>
+              <option value="follow-up-acupuncture">Acupuncture Follow-up (50 min)</option>
+              <option value="herbal-consultation">Chinese Herbal Medicine Consultation (45 min)</option>
+              <option value="cupping-guasha">Therapeutic Cupping & Gua Sha (40 min)</option>
+              <option value="massage-therapy">TCM Tui Na & Massage (60 min)</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+            <div class="form-group">
+              <label class="form-label" for="walkinDate">Date *</label>
+              <input type="date" id="walkinDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="walkinTime">Time *</label>
+              <input type="time" id="walkinTime" class="form-input" value="10:00" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="walkinNotes">Chief Complaint / Initial Intake</label>
+            <textarea id="walkinNotes" class="form-textarea" style="min-height: 70px;" placeholder="Patient's primary symptom, pain location, or onset..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notifications container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/booking-api.js"></script>
+  <script src="js/portal.js"></script>
+</body>
+</html>

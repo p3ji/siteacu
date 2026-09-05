@@ -1963,3 +1963,229 @@ html[lang="zh-CN"] .condition-tag {
   font-size: 0.82rem;
   letter-spacing: 0.01em;
 }
+
+
+/* ==========================================================================
+   Interactive Booking Widget & Slot Picker System
+   ========================================================================== */
+.booking-hours-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
+  background: var(--bg-surface-subtle);
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--gold-accent);
+}
+
+.slot-picker-container {
+  margin-top: 0.5rem;
+}
+
+.slot-picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.slot-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 0.4rem;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 0.25rem 0.15rem;
+}
+
+.slot-chip {
+  padding: 0.45rem 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--font-sans);
+}
+
+.slot-chip:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+.slot-chip.selected {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 6px rgba(31, 63, 48, 0.2);
+}
+
+.slot-chip:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  background: var(--bg-surface-subtle);
+}
+
+.contact-pref-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.contact-pref-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.35rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.contact-pref-btn:hover {
+  border-color: var(--primary);
+}
+
+.contact-pref-btn.active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.first-visit-check-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.first-visit-check-wrap input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Confirmation Card */
+.booking-confirmation-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.confirmation-icon {
+  width: 52px;
+  height: 52px;
+  background: #eaf6ef;
+  color: #2d8a54;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.confirmation-ref-box {
+  background: var(--bg-surface-subtle);
+  border: 1px dashed var(--gold-accent);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  display: inline-block;
+}
+
+.confirmation-ref-box .ref-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.confirmation-ref-box .ref-value {
+  font-family: monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+}
+
+.confirmation-details-list {
+  text-align: left;
+  background: var(--bg-surface-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin: 1rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+}
+
+.confirmation-details-list div {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.35rem;
+}
+
+.confirmation-details-list div:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.confirmation-details-list span:first-child {
+  color: var(--text-muted);
+}
+
+.confirmation-details-list span:last-child {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.footer-portal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #A3B5AA;
+  text-decoration: none;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+  margin-top: 0.75rem;
+}
+
+.footer-portal-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--gold-accent);
+}

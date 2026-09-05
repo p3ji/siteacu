@@ -99,6 +99,7 @@
 <div style="margin-top: auto; display:flex; flex-direction:column; gap:0.75rem;">
 <a class="btn btn-outline" href="tel:6135928838" style="text-align:center;">Call (613) 592-8838</a>
 <a class="btn btn-primary" data-open-modal="booking-modal" href="#book" style="text-align:center;">Book Consultation</a>
+<a href="portal.html" class="footer-portal-link" style="justify-content:center; margin-top:0.25rem;" data-i18n="portalLink">🔐 Practitioner &amp; Staff Portal</a>
 </div>
 </div>
 <main>
@@ -785,57 +786,116 @@
 <span class="section-eyebrow" data-i18n="formEyebrow">Online Inquiry</span>
 <h3 data-i18n="formTitle">Request an Appointment</h3>
 <p class="form-card-desc" data-i18n="formDesc">
-            Submit your details below and our clinic will reach out promptly to confirm your scheduled time.
-          </p>
+  Submit your details below and our clinic will reach out promptly to confirm your scheduled time.
+</p>
 <form id="booking-form-page">
-<div class="form-row-2">
-<div class="form-group">
-<label data-i18n="labelName" for="page-name">Full Name *</label>
-<input class="form-control" data-i18n-placeholder="placeholderName" id="page-name" placeholder="e.g. Eleanor Vance" required="" type="text"/>
-</div>
-<div class="form-group">
-<label data-i18n="labelPhone" for="page-phone">Phone Number *</label>
-<input class="form-control" data-i18n-placeholder="placeholderPhone" id="page-phone" placeholder="e.g. (613) 555-0123" required="" type="tel"/>
-</div>
-</div>
-<div class="form-row-2">
-<div class="form-group">
-<label data-i18n="labelEmail" for="page-email">Email Address</label>
-<input class="form-control" data-i18n-placeholder="placeholderEmail" id="page-email" placeholder="e.g. name@example.com" type="email"/>
-</div>
-<div class="form-group">
-<label data-i18n="labelModality" for="page-modality">Primary Service of Interest</label>
-<select class="form-control" id="page-modality">
-<option value="acupuncture">Acupuncture &amp; Assessment ($30/$60)</option>
-<option value="herbal">Chinese Herbal Medicine Consultation</option>
-<option value="cupping">Huo Guan · Fire Cupping</option>
-<option value="guasha">Gua Sha Therapy</option>
-<option value="massage">Chinese Medicine Massage &amp; Acupressure</option>
-<option value="general">Comprehensive Assessment (Unsure)</option>
-</select>
-</div>
-</div>
-<div class="form-group">
-<label data-i18n="labelTime" for="page-time">Preferred Time &amp; Day</label>
-<select class="form-control" id="page-time">
-<option value="morning">Morning (9:00 AM – 12:00 PM)</option>
-<option value="afternoon">Afternoon (1:00 PM – 5:00 PM)</option>
-<option value="thursday-evening">Thursday Evening (4:00 PM – 8:00 PM)</option>
-<option value="saturday">Saturday Massage Slot</option>
-</select>
-</div>
-<div class="form-group">
-<label data-i18n="labelNotes" for="page-notes">Briefly describe your symptoms or reason for visit</label>
-<textarea class="form-control" data-i18n-placeholder="placeholderNotes" id="page-notes" placeholder="e.g., Sciatic pain radiating down right leg for 3 months, or digestive flare-ups..." rows="3"></textarea>
-</div>
-<button class="btn btn-primary" data-i18n="btnSubmit" style="width:100%;" type="submit">
-              Send Appointment Request
-            </button>
-<div class="form-feedback">
-<strong>Thank you for contacting Heritage Acupuncture.</strong><br/>
-              We have received your appointment inquiry and will telephone you shortly to confirm your booking time. For immediate booking, please call us directly at <strong>(613) 592-8838</strong>.
-            </div>
+  <div class="form-row-2">
+    <div class="form-group">
+      <label data-i18n="labelName" for="page-name">Full Name *</label>
+      <input class="form-control" data-i18n-placeholder="placeholderName" id="page-name" placeholder="e.g. Eleanor Vance" required="" type="text"/>
+    </div>
+    <div class="form-group">
+      <label data-i18n="labelPhone" for="page-phone">Phone Number *</label>
+      <input class="form-control" data-i18n-placeholder="placeholderPhone" id="page-phone" placeholder="e.g. (613) 555-0123" required="" type="tel"/>
+    </div>
+  </div>
+  <div class="form-row-2">
+    <div class="form-group">
+      <label data-i18n="labelEmail" for="page-email">Email Address</label>
+      <input class="form-control" data-i18n-placeholder="placeholderEmail" id="page-email" placeholder="e.g. name@example.com" type="email"/>
+    </div>
+    <div class="form-group">
+      <label data-i18n="labelModality" for="page-modality">Primary Service of Interest</label>
+      <select class="form-control" id="page-modality">
+        <option value="initial-acupuncture" data-i18n="optInitialAcu">Initial Consultation & Acupuncture (75 min)</option>
+        <option value="follow-up-acupuncture" data-i18n="optFollowUpAcu">Acupuncture Follow-up & Treatment (50 min)</option>
+        <option value="herbal-consultation" data-i18n="optHerbalConsult">Chinese Herbal Medicine Consultation (45 min)</option>
+        <option value="cupping-guasha" data-i18n="optCuppingGuaSha">Therapeutic Cupping & Gua Sha (40 min)</option>
+        <option value="massage-therapy" data-i18n="optMassageTherapy">TCM Tui Na & Massage Therapy (60 min)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row-2">
+    <div class="form-group">
+      <label for="page-date">Preferred Date *</label>
+      <input class="form-control" id="page-date" required="" type="date"/>
+    </div>
+    <div class="form-group">
+      <label data-i18n="labelPrefContact">Preferred Confirmation Method</label>
+      <div class="contact-pref-row" id="page-contact-pref-group">
+        <button type="button" class="contact-pref-btn active" data-pref="sms" data-i18n="contactPrefSms">💬 SMS</button>
+        <button type="button" class="contact-pref-btn" data-pref="phone" data-i18n="contactPrefPhone">📞 Phone</button>
+        <button type="button" class="contact-pref-btn" data-pref="email" data-i18n="contactPrefEmail">✉️ Email</button>
+      </div>
+      <input type="hidden" id="page-contact-pref" value="sms"/>
+    </div>
+  </div>
+
+  <!-- In-page Dynamic Slot Picker -->
+  <div class="form-group slot-picker-container">
+    <div class="slot-picker-header">
+      <span data-i18n="labelSelectSlot">Available Time Slots for Selected Date:</span>
+      <span id="page-slot-status" style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;"></span>
+    </div>
+    <div class="booking-hours-hint">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Mon–Wed, Fri 9am–6pm · Thu 4pm–8pm · Sat 10am–4pm · Sun Closed</span>
+    </div>
+    <div class="slot-picker-grid" id="page-slots-grid">
+      <!-- Populated dynamically -->
+    </div>
+    <input type="hidden" id="page-selected-time" required/>
+  </div>
+
+  <label class="first-visit-check-wrap">
+    <input type="checkbox" id="page-first-visit" checked/>
+    <span data-i18n="labelFirstVisit">I am a first-time patient with Dr. Linda Xiaochun Leng</span>
+  </label>
+
+  <div class="form-group" style="margin-top:0.75rem;">
+    <label data-i18n="labelNotes" for="page-notes">Briefly describe your symptoms or reason for visit</label>
+    <textarea class="form-control" data-i18n-placeholder="placeholderNotes" id="page-notes" placeholder="e.g., Sciatic pain radiating down right leg for 3 months, or digestive flare-ups..." rows="3"></textarea>
+  </div>
+  <button class="btn btn-primary" id="page-submit-btn" data-i18n="btnSubmit" style="width:100%;" type="submit">
+    Send Appointment Request
+  </button>
 </form>
+
+<!-- In-page Confirmation Card -->
+<div class="booking-confirmation-card" id="page-confirmation-card" style="display:none; margin-top:1rem;">
+  <div class="confirmation-icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <h4 data-i18n="bookingSuccessTitle" style="font-family:var(--font-serif); font-size:1.4rem; color:var(--primary); margin-bottom:0.35rem;">Appointment Request Received</h4>
+  <p data-i18n="bookingSuccessDesc" style="font-size:0.88rem; color:var(--text-muted); max-width:440px; margin:0 auto;">
+    Thank you! We have reserved your appointment request in Dr. Leng's clinic schedule.
+  </p>
+  
+  <div class="confirmation-ref-box">
+    <div class="ref-label" data-i18n="bookingRefLabel">Your Booking Reference</div>
+    <div class="ref-value" id="page-confirm-ref">HA-0000</div>
+  </div>
+
+  <div class="confirmation-details-list">
+    <div><span>Service:</span> <span id="page-confirm-service">Initial Consultation & Acupuncture</span></div>
+    <div><span>Scheduled Time:</span> <span id="page-confirm-datetime">Monday, Oct 14 at 10:00 AM</span></div>
+    <div><span>Practitioner:</span> <span>Dr. Linda Xiaochun Leng (R.Ac, R.TCMP)</span></div>
+    <div><span>Confirmation Via:</span> <span id="page-confirm-contact">SMS Text Confirmation</span></div>
+    <div><span>Clinic Location:</span> <span>101 Arbourbrook Blvd, Carp (Free Parking)</span></div>
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.25rem;" data-i18n="bookingNextSteps">
+    Dr. Leng's clinic will reach out via your preferred contact method to confirm. For immediate questions, call (613) 592-8838.
+  </p>
+
+  <div style="display:flex; gap:0.5rem; justify-content:center;">
+    <button type="button" class="btn btn-primary" id="page-reset-booking-btn">Book Another Inquiry</button>
+    <a href="tel:6135928838" class="btn btn-outline">Call Clinic Directly</a>
+  </div>
+</div>
 </div>
 </div>
 </section>
@@ -858,6 +918,9 @@
         </div>
 <div style="font-size:0.88rem; color:#A3B5AA;">
           <span data-i18n="footerDirectPhone">Direct Phone:</span> <a href="tel:6135928838" style="color:#FFFFFF; font-weight:600;">(613) 592-8838</a>
+</div>
+<div style="margin-top: 0.85rem;">
+  <a href="portal.html" class="footer-portal-link" data-i18n="portalLink">🔐 Practitioner &amp; Staff Portal</a>
 </div>
 </div>
 <div class="footer-col">
@@ -886,65 +949,128 @@
 <div aria-hidden="true" aria-modal="true" class="modal-overlay" id="booking-modal" role="dialog">
 <div class="modal-container">
 <button aria-label="Close Modal" class="modal-close-btn">✕</button>
-<div style="margin-bottom:1.5rem;">
+<div style="margin-bottom:1.25rem;">
 <span class="section-eyebrow">Appointments</span>
-<h3 data-i18n="modalTitle" style="font-family:var(--font-serif); font-size:1.6rem; color:var(--primary);">Request a Visit with Dr. Leng</h3>
-<p data-i18n="modalDesc" style="font-size:0.88rem; color:var(--text-muted); margin-top:0.25rem;">
-          We will contact you to confirm a date and time that suits your schedule.
-        </p>
+<h3 data-i18n="modalTitle" style="font-family:var(--font-serif); font-size:1.6rem; color:var(--primary); margin-bottom:0.25rem;">Request a Visit with Dr. Leng</h3>
+<p data-i18n="modalDesc" style="font-size:0.88rem; color:var(--text-muted);">
+  Select your clinical service and preferred available time. Our clinic will promptly confirm your booking.
+</p>
 </div>
+
+<!-- Modal Interactive Form -->
 <form id="modal-booking-form">
 <div class="form-group">
-<label data-i18n="labelName" for="modal-name">Your Full Name *</label>
-<input class="form-control" data-i18n-placeholder="placeholderName" id="modal-name" placeholder="Full name" required="" type="text"/>
+  <label data-i18n="labelModality" for="modal-service">Clinical Service *</label>
+  <select class="form-control" id="modal-service" required>
+    <option value="initial-acupuncture" data-i18n="optInitialAcu">Initial Consultation & Acupuncture (75 min)</option>
+    <option value="follow-up-acupuncture" data-i18n="optFollowUpAcu">Acupuncture Follow-up & Treatment (50 min)</option>
+    <option value="herbal-consultation" data-i18n="optHerbalConsult">Chinese Herbal Medicine Consultation (45 min)</option>
+    <option value="cupping-guasha" data-i18n="optCuppingGuaSha">Therapeutic Cupping & Gua Sha (40 min)</option>
+    <option value="massage-therapy" data-i18n="optMassageTherapy">TCM Tui Na & Massage Therapy (60 min)</option>
+  </select>
 </div>
+
 <div class="form-row-2">
+  <div class="form-group">
+    <label for="modal-date">Preferred Date *</label>
+    <input class="form-control" id="modal-date" required type="date"/>
+  </div>
+  <div class="form-group">
+    <label data-i18n="labelPrefContact">Confirmation Contact Method</label>
+    <div class="contact-pref-row" id="modal-contact-pref-group">
+      <button type="button" class="contact-pref-btn active" data-pref="sms" data-i18n="contactPrefSms">💬 SMS</button>
+      <button type="button" class="contact-pref-btn" data-pref="phone" data-i18n="contactPrefPhone">📞 Phone</button>
+      <button type="button" class="contact-pref-btn" data-pref="email" data-i18n="contactPrefEmail">✉️ Email</button>
+    </div>
+    <input type="hidden" id="modal-contact-pref" value="sms"/>
+  </div>
+</div>
+
+<!-- Dynamic Slot Picker inside Modal -->
+<div class="form-group slot-picker-container">
+  <div class="slot-picker-header">
+    <span data-i18n="labelSelectSlot">Available Time Slots for Selected Date:</span>
+    <span id="modal-slot-status" style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;"></span>
+  </div>
+  <div class="booking-hours-hint">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span>Mon–Wed, Fri 9am–6pm · Thu 4pm–8pm · Sat 10am–4pm · Sun Closed</span>
+  </div>
+  <div class="slot-picker-grid" id="modal-slots-grid">
+    <!-- Populated dynamically by BookingAPI -->
+  </div>
+  <input type="hidden" id="modal-selected-time" required/>
+</div>
+
+<div class="form-row-2" style="margin-top:0.75rem;">
+  <div class="form-group">
+    <label data-i18n="labelName" for="modal-name">Your Full Name *</label>
+    <input class="form-control" data-i18n-placeholder="placeholderName" id="modal-name" placeholder="Full name" required type="text"/>
+  </div>
+  <div class="form-group">
+    <label data-i18n="labelPhone" for="modal-phone">Phone Number *</label>
+    <input class="form-control" data-i18n-placeholder="placeholderPhone" id="modal-phone" placeholder="(613) 555-0123" required type="tel"/>
+  </div>
+</div>
+
 <div class="form-group">
-<label data-i18n="labelPhone" for="modal-phone">Phone Number *</label>
-<input class="form-control" data-i18n-placeholder="placeholderPhone" id="modal-phone" placeholder="(613) 555-0123" required="" type="tel"/>
+  <label data-i18n="labelEmail" for="modal-email">Email Address</label>
+  <input class="form-control" data-i18n-placeholder="placeholderEmail" id="modal-email" placeholder="email@example.com" type="email"/>
 </div>
-<div class="form-group">
-<label data-i18n="labelEmail" for="modal-email">Email Address</label>
-<input class="form-control" data-i18n-placeholder="placeholderEmail" id="modal-email" placeholder="email@example.com" type="email"/>
+
+<label class="first-visit-check-wrap">
+  <input type="checkbox" id="modal-first-visit" checked/>
+  <span data-i18n="labelFirstVisit">I am a first-time patient with Dr. Linda Xiaochun Leng</span>
+</label>
+
+<div class="form-group" style="margin-top:0.65rem;">
+  <label data-i18n="labelNotes" for="modal-notes">Primary Health Concern or Symptoms</label>
+  <textarea class="form-control" data-i18n-placeholder="placeholderNotes" id="modal-notes" placeholder="Tell us briefly what symptoms you are experiencing..." rows="2"></textarea>
 </div>
-</div>
-<div class="form-row-2">
-<div class="form-group">
-<label data-i18n="labelModality" for="modal-service">Service Requested</label>
-<select class="form-control" id="modal-service">
-<option value="acupuncture">Acupuncture &amp; Assessment ($30 / $60)</option>
-<option value="herbal">Chinese Herbal Medicine ($30 / $20)</option>
-<option value="cupping">Huo Guan Fire Cupping ($20 / $30)</option>
-<option value="guasha">Gua Sha Therapy ($30)</option>
-<option value="massage">Chinese Medicine Massage &amp; Acupressure</option>
-<option value="unsure">Not Sure / Consultation First</option>
-</select>
-</div>
-<div class="form-group">
-<label data-i18n="labelTime" for="modal-time-pref">Preferred Time</label>
-<select class="form-control" id="modal-time-pref">
-<option value="morning">Morning (9am - 12pm)</option>
-<option value="afternoon">Afternoon (1pm - 5pm)</option>
-<option value="thursday-evening">Thursday Evening (4pm - 8pm)</option>
-<option value="saturday">Saturday Massage</option>
-</select>
-</div>
-</div>
-<div class="form-group">
-<label data-i18n="labelNotes" for="modal-notes">Primary Health Concern or Question</label>
-<textarea class="form-control" data-i18n-placeholder="placeholderNotes" id="modal-notes" placeholder="Tell us briefly what symptoms you are experiencing..." rows="2"></textarea>
-</div>
-<button class="btn btn-primary" data-i18n="btnSubmit" style="width:100%; margin-top:0.5rem;" type="submit">
-          Submit Appointment Request
-        </button>
-<div class="form-feedback">
-<strong>Thank you! Your request has been sent.</strong><br/>
-          We will review your submission and call you promptly at the phone number provided. You can also call us directly at <strong>(613) 592-8838</strong>.
-        </div>
+
+<button class="btn btn-primary" id="modal-submit-btn" data-i18n="btnSubmit" style="width:100%; margin-top:0.75rem;" type="submit">
+  Submit Appointment Request
+</button>
 </form>
+
+<!-- Modal Confirmation Card (Hidden until booked) -->
+<div class="booking-confirmation-card" id="modal-confirmation-card" style="display:none;">
+  <div class="confirmation-icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </div>
+  <h4 data-i18n="bookingSuccessTitle" style="font-family:var(--font-serif); font-size:1.4rem; color:var(--primary); margin-bottom:0.35rem;">Appointment Request Received</h4>
+  <p data-i18n="bookingSuccessDesc" style="font-size:0.88rem; color:var(--text-muted); max-width:440px; margin:0 auto;">
+    Thank you! We have reserved your appointment request in Dr. Leng's clinic schedule.
+  </p>
+  
+  <div class="confirmation-ref-box">
+    <div class="ref-label" data-i18n="bookingRefLabel">Your Booking Reference</div>
+    <div class="ref-value" id="modal-confirm-ref">HA-0000</div>
+  </div>
+
+  <div class="confirmation-details-list">
+    <div><span>Service:</span> <span id="modal-confirm-service">Initial Consultation & Acupuncture</span></div>
+    <div><span>Scheduled Time:</span> <span id="modal-confirm-datetime">Monday, Oct 14 at 10:00 AM</span></div>
+    <div><span>Practitioner:</span> <span>Dr. Linda Xiaochun Leng (R.Ac, R.TCMP)</span></div>
+    <div><span>Contact Method:</span> <span id="modal-confirm-contact">SMS Text Confirmation</span></div>
+    <div><span>Location:</span> <span>101 Arbourbrook Blvd, Carp (Free Parking)</span></div>
+  </div>
+
+  <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.25rem;" data-i18n="bookingNextSteps">
+    Dr. Leng's clinic will reach out via your preferred contact method to confirm. For immediate questions, call (613) 592-8838.
+  </p>
+
+  <div style="display:flex; gap:0.5rem; justify-content:center;">
+    <button type="button" class="btn btn-primary" id="modal-confirm-close-btn">Done</button>
+    <a href="tel:6135928838" class="btn btn-outline">Call Clinic Directly</a>
+  </div>
+</div>
 </div>
 </div>
 <script src="js/translations.js"></script>
+<script src="js/booking-api.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
