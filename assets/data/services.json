@@ -2,79 +2,79 @@
   "modalities": [
     {
       "id": "acupuncture",
-      "name": "Traditional Acupuncture & Electro-Acupuncture",
-      "tagline": "Restoring energetic balance and stimulating natural healing pathways",
-      "description": "Utilizing hair-thin, single-use surgical stainless steel needles inserted into specific meridian points (acupoints) to disperse blockages, regulate the nervous system, and stimulate circulation. Often paired with gentle infra-red heat lamps and optional micro-current electro-stimulation for deeper neurological and muscular rehabilitation.",
+      "name": "Acupuncture & Electro-Acupuncture",
+      "description": "Acupuncture consists of using very fine needles to stimulate certain points on the patient's body called acupoints along 14 channels through which Qi travels. Only sterilized disposable needles are used. Inserted painlessly to contact Qi (the sensation of Deqi). Regularly paired with infra-red lamps during the treatment session. Electro-acupuncture is offered for some treatments.",
       "pricing": [
-        { "item": "Initial Assessment (10–15 min)", "fee": "$30" },
-        { "item": "Acupuncture Treatment Session (30 min)", "fee": "$60" }
+        {
+          "item": "Initial Assessment (10 to 15 Minutes)",
+          "fee": "$30"
+        },
+        {
+          "item": "Treatment Session (30 Minutes)",
+          "fee": "$60"
+        }
       ],
-      "highlights": [
-        "100% pre-sterilized, single-use disposable needles",
-        "Targeted infra-red heat lamp therapy included where indicated",
-        "Optional electro-acupuncture for acute or neurological conditions",
-        "Rooted in both classical meridian theory and physiological neurology"
-      ]
+      "source_notes": "Sterilized disposable stainless steel needles only. Disperses blockages in Qi flow."
     },
     {
       "id": "herbal-medicine",
-      "name": "Chinese Herbal Medicine (中药)",
-      "tagline": "Custom botanical formulations tailored to your constitutional diagnosis",
-      "description": "Traditional Chinese herbal pharmacology treats the whole person, balancing primary therapeutic botanicals with harmonizing catalysts. Formulated as concentrated water-soluble granules, powders, or capsules for easy daily administration.",
+      "name": "Chinese Herbal Medicine",
+      "description": "Rooted in a tradition dating back to the 1st century C.E. manual Shennong Bencao Jing (365 medicines). Places greater emphasis on the balance and interaction of many ingredients tailored to the specific condition of the patient. Offered in herbal powder, herbal pills, and nutritional supplements.",
       "pricing": [
-        { "item": "Initial Consultation & Herbal Prescription", "fee": "$30" },
-        { "item": "Follow-Up Prescription Adjustment", "fee": "$20" },
-        { "item": "Herbal Medicinals / Formulas", "fee": "Varies by formula" }
+        {
+          "item": "Initial Assessment and Prescription",
+          "fee": "$30"
+        },
+        {
+          "item": "Follow-Up Prescription",
+          "fee": "$20"
+        },
+        {
+          "item": "Price of Herb Medicine",
+          "fee": "Additional"
+        }
       ],
-      "highlights": [
-        "Individualized constitutional formula compounding",
-        "Available in convenient granules, powders, and patent capsules",
-        "Regulated herbs sourced from tested, compliant suppliers",
-        "Addresses chronic internal disorders, fertility, digestion, and immunity"
-      ]
+      "source_notes": "Treats the patient as a complete person instead of just treating a specific sickness."
     },
     {
-      "id": "cupping",
-      "name": "Huo Guan (Fire Cupping · 火罐)",
-      "tagline": "Decompressing muscle tissue, easing myofascial tension, and promoting micro-circulation",
-      "description": "Glass cups applied using flame to create a vacuum suction. Cupping pulls stale metabolic waste out of deep muscle layers, opens lymphatic flow, and provides profound relief for persistent neck, shoulder, and lower back tightness.",
+      "id": "fire-cupping",
+      "name": "Huo Guan (Fire Cupping)",
+      "description": "Traditional cupping therapy to relieve muscular tightness and clear stagnation.",
       "pricing": [
-        { "item": "Combined with Acupuncture Session", "fee": "$20" },
-        { "item": "Standalone Cupping Session", "fee": "$30" }
+        {
+          "item": "Combined with Acupuncture Treatment",
+          "fee": "$20"
+        },
+        {
+          "item": "As Standalone Treatment",
+          "fee": "$30"
+        }
       ],
-      "highlights": [
-        "Relieves deep myofascial tightness and tension knots",
-        "Expels pathogens and systemic coldness/dampness",
-        "Popular among athletes and desk workers alike"
-      ]
+      "source_notes": "Offered as an add-on to acupuncture or standalone."
     },
     {
       "id": "gua-sha",
-      "name": "Gua Sha Scraping Therapy (刮痧)",
-      "tagline": "Releasing micro-circulatory blood stagnation and respiratory congestion",
-      "description": "A traditional scraping technique using a smooth-edged jade or buffalo horn instrument along muscle lines. Stimulates immune response, releases chronic fascia adhesions, and clears stagnation.",
+      "name": "Gua Sha",
+      "description": "Therapeutic scraping therapy used to relieve what is known in Chinese medicine as stagnation.",
       "pricing": [
-        { "item": "Standard Session (10 minutes)", "fee": "$30" }
+        {
+          "item": "Each Treatment (10 Minutes Standard)",
+          "fee": "$30"
+        }
       ],
-      "highlights": [
-        "Rapidly clears tension headaches and stiff necks",
-        "Effective during early-stage colds and respiratory tightness",
-        "Releases long-held myofascial restrictions"
-      ]
+      "source_notes": "Standard 10-minute treatment session."
     },
     {
-      "id": "tuina-massage",
-      "name": "Traditional Medical Massage & Tuina",
-      "tagline": "Acupressure and rhythmic mobilization to realign joints and meridians",
-      "description": "Targeted clinical bodywork employing pressure along meridian pathways to mobilize joints, alleviate soft-tissue trauma, and enhance blood flow. Extended hours are available on Mondays and Saturdays specifically for massage.",
+      "id": "massage",
+      "name": "Chinese Medicine Massage",
+      "description": "Acupressure and Chinese medicine massage appointments available during regular clinic hours and additional hours on Monday and Saturday.",
       "pricing": [
-        { "item": "Clinical Massage Consultation & Session", "fee": "Inquire at booking" }
+        {
+          "item": "Massage Appointment",
+          "fee": "Inquire at booking / 613-592-8838"
+        }
       ],
-      "highlights": [
-        "Special weekend and evening appointment availability",
-        "Complements acupuncture for severe orthopedic rehabilitation",
-        "Non-needle option for sensitive patients and children"
-      ]
+      "source_notes": "Additional hours open on Monday and Saturday for massage appointments."
     }
   ]
 }
