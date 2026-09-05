@@ -1509,16 +1509,6 @@ button {
   color: #FFFFFF;
 }
 
-.footer-regulatory-box {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-sm);
-  padding: 1rem;
-  font-size: 0.82rem;
-  color: #A3B5AA;
-  line-height: 1.5;
-}
-
 .footer-bottom {
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
