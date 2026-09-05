@@ -10,6 +10,9 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400;1,6..72,500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="css/styles.css" rel="stylesheet"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon.png"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" href="assets/images/logo-mark-transparent.png"/>
 </head>
 <body>
 <!-- Top Utility Bar -->
@@ -35,7 +38,7 @@
 <header class="site-header">
 <div class="container header-inner">
 <a class="brand-link" href="#hero">
-<div aria-hidden="true" class="brand-emblem">春</div>
+<img src="assets/images/logo-mark-transparent.png" alt="Heritage Acupuncture Logo" class="brand-logo-img">
 <div class="brand-titles">
 <span class="brand-title-en">Heritage Acupuncture</span>
 <span class="brand-title-sub" data-i18n="brandSubtitle">&amp; Chinese Herbal Center · 冷晓春</span>
@@ -67,13 +70,16 @@
 </header>
 <!-- Mobile Drawer -->
 <div aria-hidden="true" class="mobile-nav-drawer">
-<div class="mobile-nav-header">
-<div class="brand-titles">
-<span class="brand-title-en">Heritage Acupuncture</span>
-<span class="brand-title-sub">冷晓春 中医针灸</span>
-</div>
-<button aria-label="Close Menu" class="mobile-nav-close" style="font-size:1.8rem; color:var(--text-main);">✕</button>
-</div>
+    <div class="mobile-nav-header">
+      <div class="brand-link" style="gap:0.75rem;">
+        <img src="assets/images/logo-mark-transparent.png" alt="Heritage Acupuncture Logo" class="brand-logo-img" style="width:38px; height:38px;">
+        <div class="brand-titles">
+          <span class="brand-title-en">Heritage Acupuncture</span>
+          <span class="brand-title-sub">冷晓春 中医针灸</span>
+        </div>
+      </div>
+      <button aria-label="Close Menu" class="mobile-nav-close" style="font-size:1.8rem; color:var(--text-main);">✕</button>
+    </div>
 <div class="mobile-lang-row">
 <span class="mobile-lang-label" data-i18n="langLabel">Language / 语言:</span>
 <div aria-label="Language selection" class="lang-toggle" role="group">
@@ -860,8 +866,13 @@
 <footer class="site-footer">
 <div class="container footer-grid">
 <div class="footer-brand">
-<h4>Heritage Acupuncture &amp; Chinese Herbal Center</h4>
-<p data-i18n="footerBrandDesc">
+  <div class="footer-logo-wrap">
+    <div class="footer-logo-badge">
+      <img src="assets/images/logo-mark-transparent.png" alt="Heritage Acupuncture Logo" class="footer-logo-img">
+    </div>
+    <h4 style="margin:0;">Heritage Acupuncture &amp; Chinese Herbal Center</h4>
+  </div>
+  <p data-i18n="footerBrandDesc">
           Providing regulated, patient-centered Traditional Chinese Medicine and Acupuncture in Kanata and Carp, Ontario. Serving Ottawa West with hospital-trained expertise since 1987.
         </p>
 <div style="font-family:var(--font-serif); font-size:1.1rem; color:var(--gold-accent); margin-bottom:1rem;">
